@@ -1,0 +1,251 @@
+--카페 회원 테이블 작성
+
+drop sequence memberseq;
+create sequence memberseq   
+increment by 1
+start with 1
+minvalue 0
+maxvalue 10000
+nocache;
+
+
+drop table member cascade constraints purge;
+
+create table member(
+    num number primary key,
+    id varchar2(12) not null,
+    password varchar2(12) not null,
+    email varchar2(30),
+    birth date,
+    name varchar2(30) not null,
+    telecom varchar2(20) not null,
+    hphone varchar2(20) not null
+);  
+
+
+--관리자
+insert into member(num, id, password, email, birth, name, telecom,hphone) 
+values(memberseq.nextval, 'admin', '1234', 'abc123@naver.com','2001-10-12','어드민','skt','010-1234-5678');
+
+--고객
+insert into member(num, id, password, email, birth, name, telecom,hphone) 
+values(memberseq.nextval, 'hong', '5678', 'def567@daum.com', '2001-5-7','홍길동','skt','010-9876-5432') ;
+commit;
+
+-- 카테고리 테이블
+drop sequence cagoseq ;
+drop table cago purge ;
+
+create sequence cagoseq
+increment by 1
+start with 1
+minvalue 1
+maxvalue 10000
+nocache;
+
+create table cago(
+	cnum 	number primary key,
+	code 	varchar2(20) not null,
+	cname 	varchar2(50) not null
+);
+
+insert into cago(cnum,code,cname)values(cagoseq.nextval, 'COFFEE','커피');
+insert into cago(cnum,code,cname)values(cagoseq.nextval, 'TEA','차');
+
+
+	
+-- 상품테이블
+
+drop sequence mdseq ;
+create sequence mdseq 
+increment by 1
+start with 1
+minvalue 0  
+maxvalue 10000
+nocache;
+
+drop table pmd cascade constraints purge;
+create table pmd(
+    pnum          int not null primary key,
+    pname         varchar2(50) not null,
+    pcategory_fk  varchar2(20) not null, -- 선택한 카테고리
+    pimage        varchar2(30),
+    pqty          int default 0,
+    price         int default 0,
+    pcontents     varchar2(300),
+    point         int default 0
+);
+
+	
+--게시판테이블
+drop table board;
+
+create table board( 
+	num number not null primary key,
+	writer varchar2(20) not null,
+	email varchar2(20),
+	subject varchar2(20) not null,
+	passwd varchar2(20) not null,
+	reg_date date not null,
+	readcount int default 0,
+	ref number not null,
+	re_step number not null,
+	re_level number not null, --원글:0, 답글:1, 답답글:2 답답답글:3
+	content varchar2(20) not null,
+	ip varchar2(20) not null
+);
+
+drop sequence board_seq;
+create sequence board_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+  
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a1','a1','a1','1234','2023-1-1',1,0,0,'내용1','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a2','a2','a2','1234','2023-1-1',2,0,0,'내용2','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a21','a21','a21','1234','2023-1-1',2,4,1,'내용21','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a22','a22','a22','1234','2023-1-1',2,1,1,'내용22','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a221','a221','a221','1234','2023-1-1',2,3,2,'내용221','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a222','a222','a222','1234','2023-1-1',2,2,2,'내용222','127.0.0.1');
+
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a3','a3','a3','1234','2023-1-1',7,0,0,'내용3','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a31','a31','a31','1234','2023-1-1',7,6,1,'내용31','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a311','a311','a311','1234','2023-1-1',7,7,2,'내용311','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a32','a32','a32','1234','2023-1-1',7,2,1,'내용32','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a321','a321','a321','1234','2023-1-1',7,5,2,'내용321','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a322','a322','a322','1234','2023-1-1',7,3,2,'내용322','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a3221','a3221','a3221','1234','2023-1-1',7,4,3,'내용3221','127.0.0.1');
+
+insert into board(num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip)
+values(board_seq.nextval,'a33','a33','a33','1234','2023-1-1',7,1,1,'내용33','127.0.0.1');
+
+
+
+drop sequence oseq;
+
+create sequence oseq
+increment by 1
+start with 1
+minvalue 0
+maxvalue 10000
+nocache;
+
+drop table orderm cascade constraints purge ;
+
+create table orderm(
+   ordernum number,
+   memno number,
+   pnum number,
+   qty number,
+   amount number
+);
+
+commit;
+
+--- memo ---
+//주문번호 회원이름 상품명 상품수량 전체가격
+
+-대표 cafemain.jsp 만들기
+    
+cafe_top.jsp
+모든 창에서 대표이미지사진 클릭하면 cafemain.jsp로 이동시키기.
+(회원)이름을 클릭하면 마이페이지로 이동하기
+내가 구매한 내역 확인 가능
+
+cafe_bottom.jsp
+
+-login_main.jsp(session 값 설정)
+(아이디 비밀번호 입력 후 로그인 클릭(loginProc.jsp 으로 이동)/ 회원가입 / 아이디찾기/ 비밀번호 찾기)
+
+-loginProc.jsp (id,pw 가져오기)
+-관리자 계정과 고객계정 접속 시 다른 화면으로 이동시키기.
+
+-아이디, 비밀번호 찾기(member 폴더)
+
+-회원가입 form
+*maxlength 설정하기
+ 
+이름, 아이디, 비밀번호, 비밀번호 확인, 이메일 선택(수신동의), table1
+생년월일, 통신사 체크(select), 전화번호123(이벤트문자 수신동의), (주소) table2
+ex) check box 활용해서 광고 수신 동의 만들어 보기.
+
+*생년월일 달력 (<input type="date" name="day">)
+
+(중복체크 확인하기 틀리면 빨간색테두리)
+이메일 빼고 필수로 적어야 한다고 알려주기.
+
+아이디: 필수 정보입니다.
+비밀번호: 필수 정보입니다.
+이메일: 이메일 주소가 정확한지 확인해 주세요.
+
+
+-관리자페이지
+admin 폴더 하나 생성하기
+관리자계정으로 로그인 성공시 admin_main.jsp 로 이동시키기.
+로그아웃 클릭 시 alert("로그아웃 완료")띄우고. cafe_main.jsp 로 이동시키기.
+
+카테고리 등록(f,p), *수정(f,p), 삭제
+상품 등록(f,p), 수정(f,p), 삭제
+
+대분류 => 카테고리 관리 | MD상품관리 | 회원관리
+
+카테고리 관리
+(목록,등록)
+
+상품관리
+상품 목록
+상품 등록 - 클릭 시 수정폼으로 이동 -> 상품수정
+       - 클릭 시 삭제(삭제proc)
+
+회원관리
+구매 내역
+   
+       
+-고객페이지
+
+마이페이지 들어가면 기본정보 수정 가능하게 하기.
+
+
+제품 상세보기
+1회 제공량 (kcal)80
+포화지방 (g)2
+단백질 (g)1
+나트륨 (mg)40
+당류 (g)10
+카페인 (mg)232
+알레르기 유발요인 : 우유
+
+4/23~ 5/8 밤 11:59
+프로젝트명 이니셜이라도 넣기
+프로젝트안에 DB테이블 넣기
+실행영상 10분내외
+
+

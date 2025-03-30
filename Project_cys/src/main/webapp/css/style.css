@@ -1,0 +1,116 @@
+:root {
+    --color-beige:#FBF5EF;
+    --color-font-black: #333;
+    --color-font-light-black: #555;
+    --font-family : normal Avenir, Arial, georgia;
+}
+* {
+    margin: 0;
+    padding: 0;
+    color:var(--color-font-black);
+    font-family: var(--font-family);
+}
+header{
+    border-top: solid 2px black;
+    background: var(--color-beige);
+    position: fixed;
+    top:0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+header .head-wrap .head-wrap-inner{
+    height: 120px;
+    width: 1100px;
+    position: relative;
+    border:var( --temp-border);
+}
+
+.head-logo{
+    top:0px;
+    right:10px;
+    width:150px;
+    height:150px;
+}
+header .head-wrap .head-wrap-inner .head-menu-top-nav{ /* sign 위치이동 */
+    position: absolute;
+    left:880px;
+    top:21px;
+  
+}
+
+header .head-wrap .head-wrap-inner .head-menu-top-nav ul{
+    list-style: none;
+}
+
+header .head-wrap .head-wrap-inner .head-menu-top-nav ul li{
+    float: left;
+    color: var( --color-font-light-black);
+    font-size: 15px;
+    text-align: center;
+    height: 20px;
+  
+    border:var( --temp-border);
+    margin-right: 20px;
+
+}
+header .head-wrap .head-wrap-inner .head-menu-top-nav ul li a{
+    text-decoration: none;
+}
+header .head-wrap .head-wrap-inner .head-menu-top-nav ul li a:hover{
+    text-decoration: underline;
+}
+header .head-wrap .head-wrap-inner .head-menu-top-nav ul .top-nav01
+{
+    width:76px;
+  
+}
+header .head-wrap .head-wrap-inner .head-menu-top-nav ul .top-nav02
+{
+    width:106px;
+    
+}
+
+header .head-wrap-sub{
+   
+    position: absolute;
+    top:60px;
+    width: 1100px;
+    height: 66px;
+    border:var( --temp-border);
+}
+header .head-wrap-sub{
+    display: flex;
+    justify-content: flex-end;
+    
+
+}
+header .head-wrap-sub ul{
+   list-style: none;
+   width: 737px;
+    display: flex;
+    justify-content:space-between;
+ 
+    border:var( --temp-border);
+   
+}
+header .head-wrap-sub ul li{
+    text-align: left;
+    flex: auto;
+    
+}
+header .head-wrap-sub ul li a{
+    text-decoration: none;
+    display: block;
+    margin: auto;
+    
+    text-transform: uppercase;
+    text-align:center;
+    font-size: 18px;
+    padding-top: 10px;
+    height: 66px;
+} 
